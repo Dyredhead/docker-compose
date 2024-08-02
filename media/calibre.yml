@@ -1,0 +1,21 @@
+services:
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: calibre
+    security_opt:
+      - no-new-privileges:true
+      - seccomp:unconfined
+    environment:
+      - PUID:1000
+      - PGID:1000
+      - TZ:Etc/UTC
+      - CUSTOM_USER:dyredhead
+      - PASSWORD:$PASSWORD
+    volumes:
+      - $HOME/Docker/Config/calibre:/config
+      - /srv/Books:/data
+    ports:
+      - 8080:8080
+      - 8081:8081
+      # - 8181: 8181
+    restart: unless-stopped
