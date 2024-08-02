@@ -1,0 +1,49 @@
+version: "2.1"
+services:
+
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web_Novels
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - $HOME/Docker/Config/calibre-web/Novels:/config
+      - /srv/Books/Novels:/books
+    ports:
+      - 8083:8083
+    restart: unless-stopped
+    
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web_Comics
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - $HOME/Docker/Config/calibre-web/Comics:/config
+      - /srv/Books/Comics:/books
+    ports:
+      - 8084:8083
+    restart: unless-stopped
+    
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: calibre-web_Fanfiction
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - DOCKER_MODS=linuxserver/mods:universal-calibre #optional
+      - OAUTHLIB_RELAX_TOKEN_SCOPE=1 #optional
+    volumes:
+      - $HOME/Docker/Config/calibre-web/Fanfiction:/config
+      - /srv/Books/Fanfiction:/books
+    ports:
+      - 8085:8083
