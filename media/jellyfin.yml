@@ -1,0 +1,26 @@
+version: '3.5'
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/New_York
+    ports:
+      - 8096:8096
+      - 8920:8920 #optional
+      - 7359:7359/udp #optional
+      - 1900:1900/udp #optional
+    volumes:
+      - $HOME/Docker/Config/jellyfin:/config
+      - $HOME/Docker/Cache/jellyfin:/cache
+      - /srv/media/Movies:/data/Movies
+      - /srv/media/Shows:/data/TV-Shows
+      - /srv/media/Anime:/data/Anime
+      - /srv/media/Music:/data/Music
+      - /srv/media/Books:/data/Books
+      # - /srv/media/Porn:/data/Porn
+    devices:
+      - /dev/dri:/dev/dri
+    restart: 'unless-stopped'
