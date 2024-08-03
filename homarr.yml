@@ -1,0 +1,23 @@
+services: 
+  homarr:
+    container_name: homarr-lan
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - $HOME/Docker/Config/homarr-lan:/app/data/configs
+      - $HOME/Docker/Icons/homarr:/app/public/icons
+      - $HOME/Docker/Data/homarr:/data # Database mount point, can also be a volume 
+    ports:
+      - 7575:7575
+  homarr:
+    container_name: homarr-wan
+    image: ghcr.io/ajnart/homarr:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - $HOME/Docker/Config/homarr-wan:/app/data/configs
+      - $HOME/Docker/Icons/homarr:/app/public/icons
+      - $HOME/Docker/Data/homarr:/data # Database mount point, can also be a volume 
+    ports:
+      - 7576:7575
